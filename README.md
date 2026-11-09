@@ -11,3 +11,7 @@ open Teleprompter.xcodeproj
 ```
 
 Core tests: `cd TeleprompterCore && swift test`.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
