@@ -42,15 +42,27 @@ struct ScriptView: View {
     private func line(_ line: Script.Line) -> some View {
         let font = Font.system(size: line.kind == .heading ? fontSize * 1.15 : fontSize,
                                weight: line.kind == .heading ? .bold : .regular)
-        if line.wordRange.isEmpty {
+        if line.wordRange.isEmpty && line.notes.isEmpty {
             Text(line.text).font(font).foregroundStyle(.secondary)
         } else {
             FlowLayout(spacing: fontSize * 0.28, rowSpacing: fontSize * 0.18) {
                 ForEach(line.wordRange, id: \.self) { index in
+                    ForEach(line.notes.filter { $0.beforeWord == index }, id: \.self) { note($0) }
                     word(index, font: font)
                 }
+                ForEach(line.notes.filter { $0.beforeWord >= line.wordRange.upperBound }, id: \.self) { note($0) }
             }
         }
+    }
+
+    /// A stage direction: visible to the reader, never spoken or tracked.
+    private func note(_ note: Script.Note) -> some View {
+        Text(note.text)
+            .font(.system(size: fontSize * 0.55, weight: .medium).italic())
+            .foregroundStyle(.orange)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 2)
+            .background(.orange.opacity(0.15), in: .capsule)
     }
 
     private func word(_ index: Int, font: Font) -> some View {
