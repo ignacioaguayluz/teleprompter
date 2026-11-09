@@ -26,6 +26,7 @@ final class TeleprompterViewModel {
         static let fontSize = "fontSize"
         static let deviceUID = "inputDeviceUID"
         static let recording = "recordingEnabled"
+        static let lastScript = "lastScriptMarkdown"
     }
 
     private(set) var script: Script
@@ -55,7 +56,8 @@ final class TeleprompterViewModel {
     @ObservationIgnored private var listenTask: Task<Void, Never>?
 
     init() {
-        let script = Script(markdown: Self.sampleScript())
+        let savedScript = UserDefaults.standard.string(forKey: Keys.lastScript)
+        let script = Script(markdown: savedScript ?? Self.sampleScript())
         self.script = script
         aligner = ScriptAligner(script: script)
         navigator = ScriptNavigator(script: script)
@@ -75,6 +77,7 @@ final class TeleprompterViewModel {
     // MARK: Script
 
     func load(markdown: String) {
+        defaults.set(markdown, forKey: Keys.lastScript)
         script = Script(markdown: markdown)
         aligner = ScriptAligner(script: script)
         navigator = ScriptNavigator(script: script)
