@@ -15,7 +15,7 @@ public struct AlignerConfig: Sendable, Equatable {
     /// Consecutive matches needed for a normal advance.
     public var minMatchesToAdvance = 2
     /// Minimum length of a single word allowed to advance by one on its own.
-    public var minSingleWordLength = 6
+    public var minSingleWordLength = 3
     /// Consecutive matches needed for a forward jump.
     public var minMatchesToJump = 3
     /// Consecutive matches needed to move backward.

@@ -30,7 +30,7 @@ struct ScriptView: View {
                 }
                 .scrollIndicators(.never)
                 .onChange(of: currentLine) { _, line in
-                    withAnimation(.easeInOut(duration: 0.35)) { proxy.scrollTo(line, anchor: Self.readingZone) }
+                    withAnimation(.easeInOut(duration: 0.15)) { proxy.scrollTo(line, anchor: Self.readingZone) }
                 }
                 .onChange(of: script) { _, _ in proxy.scrollTo(currentLine, anchor: Self.readingZone) }
                 .onAppear { proxy.scrollTo(currentLine, anchor: Self.readingZone) }

@@ -35,6 +35,11 @@ import Testing
         #expect(align(from: 7, heard: "conflicto") == 8)
     }
 
+    @Test func singleThreeLetterWordAdvancesOnlyToTheNextWord() {
+        #expect(align(from: 9, heard: "dos") == 10)
+        #expect(align(from: 8, heard: "dos") == 8)
+    }
+
     @Test func singleShortWordDoesNotAdvance() {
         #expect(align(from: 6, heard: "el") == 6)
     }

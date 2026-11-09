@@ -46,7 +46,7 @@ final class AudioInput: @unchecked Sendable {
     func start() throws {
         guard !isRunning.withLock({ $0 }) else { return }
         let node = engine.inputNode
-        node.installTap(onBus: 0, bufferSize: 4096, format: node.outputFormat(forBus: 0)) { [weak self] buffer, time in
+        node.installTap(onBus: 0, bufferSize: 1024, format: node.outputFormat(forBus: 0)) { [weak self] buffer, time in
             self?.deliver(buffer, at: time)
         }
         engine.prepare()
