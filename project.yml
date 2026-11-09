@@ -17,6 +17,8 @@ targets:
     platform: macOS
     sources:
       - Teleprompter
+      - path: samples/guion-ejemplo.md
+        buildPhase: resources
     dependencies:
       - package: TeleprompterCore
     info:
